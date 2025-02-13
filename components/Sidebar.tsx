@@ -1,14 +1,12 @@
 import { useState } from 'react';
-import { useBookmarks } from '../contexts/BookmarkContext';
+import { useCategories } from '../contexts/CategoryContext';
 import Modal from './Modal';
 import AddCategoryForm from './AddCategoryForm';
 
 export default function Sidebar() {
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
   const [showAddCategory, setShowAddCategory] = useState(false);
-  const { bookmarks } = useBookmarks();
-
-  const categories = Array.from(new Set(bookmarks.map(b => b.category)));
+  const { categories, addCategory } = useCategories();
 
   const getCategoryIcon = (category: string) => {
     const icons: Record<string, string> = {
@@ -23,8 +21,7 @@ export default function Sidebar() {
 
   // 处理添加新分类
   const handleAddCategory = (newCategory: string) => {
-    // 这里可以添加新分类的处理逻辑
-    // 目前我们只需要关闭模态框，因为新分类会在添加书签时自动创建
+    addCategory(newCategory);
     setShowAddCategory(false);
   };
 
@@ -72,7 +69,6 @@ export default function Sidebar() {
           bg-gray-200 dark:bg-gray-700
           transition-colors duration-200" />
 
-        {/* 添加新分类按钮 */}
         <button 
           onClick={() => setShowAddCategory(true)}
           className="w-12 h-12 rounded-full 
@@ -86,7 +82,6 @@ export default function Sidebar() {
         </button>
       </div>
 
-      {/* 添加分类模态框 */}
       <Modal
         isOpen={showAddCategory}
         onClose={() => setShowAddCategory(false)}

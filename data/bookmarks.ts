@@ -20,7 +20,21 @@ export const defaultBookmarks = [
     id: '1',
     title: 'GitHub',
     url: 'https://github.com',
-    icon: '/icons/github.svg',
+    icon: '../icons/github.svg',
     category: 'developer'
+  },
+  {
+    id: '2',
+    title: 'Google',
+    url: 'https://www.google.com',
+    icon: '../icons/google.svg',
+    category: 'developer'
+  },
+  {
+    id: '3',
+    title: 'QQ',
+    url: 'https://www.google.com',
+    icon: '../icons/google.svg',
+    category: 'social'
   }
 ]; 
