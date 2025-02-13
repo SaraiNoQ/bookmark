@@ -1,23 +1,29 @@
 import { useState } from 'react';
 import { useBookmarks } from '../contexts/BookmarkContext';
+import { useCategories } from '../contexts/CategoryContext';
 import SearchBar from '../components/SearchBar';
 import BookmarkCard from '../components/BookmarkCard';
 import ThemeToggle from '../components/ThemeToggle';
 import Sidebar from '../components/Sidebar';
 import Modal from '../components/Modal';
 import AddBookmarkForm from '../components/AddBookmarkForm';
-import { PlusIcon } from '@heroicons/react/24/outline';
+import { PlusIcon, TrashIcon } from '@heroicons/react/24/outline';
 
 export default function Home() {
   const { bookmarks } = useBookmarks();
+  const { categories } = useCategories();
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
   const [addingCategory, setAddingCategory] = useState<string | null>(null);
+  const [showClearConfirm, setShowClearConfirm] = useState(false);
 
-  // 获取所有分类
-  const categories = Array.from(new Set(bookmarks.map(b => b.category)));
-  
   // 根据选中的分类过滤书签
   const filteredCategories = activeCategory ? [activeCategory] : categories;
+
+  // 清除所有数据
+  const handleClearAll = () => {
+    localStorage.clear();
+    window.location.reload(); // 刷新页面以重新加载默认数据
+  };
 
   return (
     <div className="min-h-screen bg-gray-100 dark:bg-gray-900 transition-colors">
@@ -31,10 +37,24 @@ export default function Home() {
             <h1 className="text-2xl font-bold bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent">
               书签导航
             </h1>
-            <ThemeToggle />
+            <div className="flex items-center gap-2">
+              <ThemeToggle />
+              <button
+                onClick={() => setShowClearConfirm(true)}
+                className="p-2 rounded-lg 
+                  bg-white dark:bg-gray-800 
+                  shadow-neu-light dark:shadow-neu-dark 
+                  hover:shadow-neu-light-hover dark:hover:shadow-neu-dark-hover 
+                  transition-shadow"
+                title="清除所有数据"
+              >
+                <TrashIcon className="w-6 h-6 text-red-500" />
+              </button>
+            </div>
           </div>
         </header>
 
+        {/* 现有的主要内容... */}
         <main className="container mx-auto px-4 py-8">
           <SearchBar />
 
@@ -83,6 +103,39 @@ export default function Home() {
             onClose={() => setAddingCategory(null)}
           />
         )}
+      </Modal>
+
+      {/* 清除确认模态框 */}
+      <Modal
+        isOpen={showClearConfirm}
+        onClose={() => setShowClearConfirm(false)}
+        title="确认清除"
+      >
+        <div className="space-y-4">
+          <p className="text-gray-600 dark:text-gray-300">
+            确定要清除所有数据吗？此操作不可恢复。
+          </p>
+          <div className="flex justify-end gap-3">
+            <button
+              onClick={() => setShowClearConfirm(false)}
+              className="px-4 py-2 rounded-lg
+                bg-gray-100 dark:bg-gray-700
+                hover:bg-gray-200 dark:hover:bg-gray-600
+                transition-colors"
+            >
+              取消
+            </button>
+            <button
+              onClick={handleClearAll}
+              className="px-4 py-2 rounded-lg
+                bg-red-500 text-white
+                hover:bg-red-600
+                transition-colors"
+            >
+              确认清除
+            </button>
+          </div>
+        </div>
       </Modal>
     </div>
   );
