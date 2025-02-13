@@ -1,0 +1,89 @@
+import { useState } from 'react';
+import { useBookmarks } from '../contexts/BookmarkContext';
+import SearchBar from '../components/SearchBar';
+import BookmarkCard from '../components/BookmarkCard';
+import ThemeToggle from '../components/ThemeToggle';
+import Sidebar from '../components/Sidebar';
+import Modal from '../components/Modal';
+import AddBookmarkForm from '../components/AddBookmarkForm';
+import { PlusIcon } from '@heroicons/react/24/outline';
+
+export default function Home() {
+  const { bookmarks } = useBookmarks();
+  const [activeCategory, setActiveCategory] = useState<string | null>(null);
+  const [addingCategory, setAddingCategory] = useState<string | null>(null);
+
+  // 获取所有分类
+  const categories = Array.from(new Set(bookmarks.map(b => b.category)));
+  
+  // 根据选中的分类过滤书签
+  const filteredCategories = activeCategory ? [activeCategory] : categories;
+
+  return (
+    <div className="min-h-screen bg-gray-100 dark:bg-gray-900 transition-colors">
+      {/* 侧边栏 */}
+      <Sidebar />
+
+      {/* 主要内容区域 */}
+      <div className="ml-[72px]">
+        <header className="sticky top-0 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm">
+          <div className="container mx-auto px-4 py-3 flex items-center justify-between">
+            <h1 className="text-2xl font-bold bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent">
+              书签导航
+            </h1>
+            <ThemeToggle />
+          </div>
+        </header>
+
+        <main className="container mx-auto px-4 py-8">
+          <SearchBar />
+
+          {/* 分类书签展示 */}
+          <div className="mt-8 space-y-8">
+            {filteredCategories.map(category => (
+              <div key={category}>
+                <h2 className="text-xl font-semibold mb-4 text-gray-800 dark:text-gray-200">
+                  {category.charAt(0).toUpperCase() + category.slice(1)}
+                </h2>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                  {bookmarks
+                    .filter(b => b.category === category)
+                    .map(bookmark => (
+                      <BookmarkCard key={bookmark.id} bookmark={bookmark} />
+                    ))}
+                  
+                  {/* 添加书签按钮 */}
+                  <button
+                    onClick={() => setAddingCategory(category)}
+                    className="p-4 rounded-lg 
+                      bg-white dark:bg-gray-800
+                      shadow-neu-light dark:shadow-neu-dark
+                      hover:shadow-neu-light-hover dark:hover:shadow-neu-dark-hover
+                      transition-shadow
+                      flex items-center justify-center"
+                  >
+                    <PlusIcon className="w-6 h-6 text-blue-500" />
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+        </main>
+      </div>
+
+      {/* 添加书签模态框 */}
+      <Modal
+        isOpen={!!addingCategory}
+        onClose={() => setAddingCategory(null)}
+        title="添加书签"
+      >
+        {addingCategory && (
+          <AddBookmarkForm
+            category={addingCategory}
+            onClose={() => setAddingCategory(null)}
+          />
+        )}
+      </Modal>
+    </div>
+  );
+} 
