@@ -57,7 +57,7 @@ export default function Sidebar() {
               {category.charAt(0).toUpperCase() + category.slice(1)}
             </div>
 
-            <div className={`absolute left-0 top-1/2 -translate-y-1/2 
+            <div className={`absolute left-[-2px] top-1/2 -translate-y-1/2 
               w-1 h-8 rounded-r-full
               bg-gradient-to-b from-blue-500 to-purple-500
               transition-all duration-200

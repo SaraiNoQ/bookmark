@@ -66,7 +66,7 @@ export default function Home() {
 
       {/* 主要内容区域 */}
       <div className="ml-[72px]">
-        <header className="sticky top-0 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm">
+        <header className="sticky top-0 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm z-50">
           <div className="container mx-auto px-4 py-3 flex items-center justify-between">
             <h1 className="text-2xl font-bold bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent">
               书签导航
@@ -115,13 +115,13 @@ export default function Home() {
           <SearchBar />
 
           {/* 分类书签展示 */}
-          <div className="mt-8 space-y-8">
+          <div className="mt-8 space-y-12">
             {filteredCategories.map(category => (
               <div key={category}>
-                <h2 className="text-xl font-semibold mb-4 text-gray-800 dark:text-gray-200">
+                <h2 className="text-xl font-semibold mb-6 text-gray-800 dark:text-gray-200 px-2">
                   {category.charAt(0).toUpperCase() + category.slice(1)}
                 </h2>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-8 gap-4 px-2">
                   {bookmarks
                     .filter(b => b.category === category)
                     .map(bookmark => (
@@ -131,11 +131,13 @@ export default function Home() {
                   {/* 添加书签按钮 */}
                   <button
                     onClick={() => setAddingCategory(category)}
-                    className="p-4 rounded-lg 
+                    className="p-3 rounded-lg 
                       bg-white dark:bg-gray-800
                       shadow-neu-light dark:shadow-neu-dark
                       hover:shadow-neu-light-hover dark:hover:shadow-neu-dark-hover
-                      transition-shadow
+                      hover:scale-102 hover:-translate-y-1
+                      transition-all duration-300
+                      w-full max-w-[200px] h-[80px]
                       flex items-center justify-center"
                   >
                     <PlusIcon className="w-6 h-6 text-blue-500" />
@@ -143,7 +145,7 @@ export default function Home() {
                 </div>
               </div>
             ))}
-          </div>
+          </div> 
         </main>
       </div>
 

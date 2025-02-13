@@ -21,11 +21,15 @@ export default function BookmarkCard({ bookmark }: BookmarkCardProps) {
 
   return (
     <>
-      <div 
-        className="relative p-4 rounded-lg bg-white dark:bg-gray-800 
+       <div 
+        className="relative p-3 rounded-lg bg-white dark:bg-gray-800
           shadow-neu-light dark:shadow-neu-dark 
-          hover:shadow-neu-light-hover dark:hover:shadow-neu-dark-hover 
-          transition-shadow"
+          group hover:scale-102 hover:-translate-y-1
+          hover:shadow-[0_15px_30px_-5px_rgba(0,0,0,0.1),0_10px_20px_-5px_rgba(0,0,0,0.04)]
+          dark:hover:shadow-[0_15px_30px_-5px_rgba(0,0,0,0.5),0_10px_20px_-5px_rgba(0,0,0,0.4)]
+          transition-all duration-300 ease-out
+          w-full max-w-[200px] h-[80px]
+          cursor-pointer"
         onMouseEnter={() => setShowDelete(true)}
         onMouseLeave={() => setShowDelete(false)}
       >
@@ -33,26 +37,31 @@ export default function BookmarkCard({ bookmark }: BookmarkCardProps) {
           href={bookmark.url}
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center gap-3"
+          className="flex items-center gap-2 h-full"
         >
           <img 
             src={bookmark.icon || `https://www.google.com/s2/favicons?domain=${bookmark.url}`}
             alt={bookmark.title}
-            className="w-6 h-6"
+            className="w-6 h-6 flex-shrink-0"
           />
-          <span className="flex-1 text-gray-800 dark:text-gray-200">
+          <span className="flex-1 text-gray-800 dark:text-gray-200 text-sm truncate">
             {bookmark.title}
           </span>
         </a>
         
         {showDelete && (
           <button
-            onClick={() => setShowDeleteModal(true)}
+            onClick={(e) => {
+              e.preventDefault();
+              setShowDeleteModal(true);
+            }}
             className="absolute -top-2 -right-2 p-1.5 rounded-full
               bg-red-100 dark:bg-red-900/30
               hover:bg-red-200 dark:hover:bg-red-900/50
-              transition-colors
-              opacity-0 group-hover:opacity-100"
+              transition-all duration-200
+              opacity-0 group-hover:opacity-100
+              transform scale-90 group-hover:scale-100
+              shadow-lg"
           >
             <TrashIcon className="w-4 h-4 text-red-500" />
           </button>
