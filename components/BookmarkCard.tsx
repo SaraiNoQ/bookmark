@@ -45,14 +45,14 @@ export default function BookmarkCard({ bookmark }: BookmarkCardProps) {
           </span>
         </a>
         
-        {/* 删除按钮 */}
         {showDelete && (
           <button
             onClick={() => setShowDeleteModal(true)}
-            className="absolute top-2 right-2 p-1.5 rounded-full
+            className="absolute -top-2 -right-2 p-1.5 rounded-full
               bg-red-100 dark:bg-red-900/30
               hover:bg-red-200 dark:hover:bg-red-900/50
-              transition-colors"
+              transition-colors
+              opacity-0 group-hover:opacity-100"
           >
             <TrashIcon className="w-4 h-4 text-red-500" />
           </button>
