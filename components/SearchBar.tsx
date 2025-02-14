@@ -35,7 +35,7 @@ export default function SearchBar() {
               <span className="block truncate">
                 <div className="flex items-center gap-2">
                   <img 
-                    src={`https://www.google.com/s2/favicons?domain=${selectedEngine.searchUrl}`} 
+                    src={selectedEngine.icon || `https://www.google.com/s2/favicons?domain=${selectedEngine.searchUrl}`} 
                     alt={selectedEngine.name}
                     className="w-4 h-4"
                   />
@@ -74,7 +74,7 @@ export default function SearchBar() {
                     <>
                       <div className="flex items-center gap-2">
                         <img 
-                          src={`https://www.google.com/s2/favicons?domain=${engine.searchUrl}`} 
+                          src={engine.icon || `https://www.google.com/s2/favicons?domain=${engine.searchUrl}`} 
                           alt={engine.name}
                           className="w-4 h-4"
                         />

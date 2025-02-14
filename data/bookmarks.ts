@@ -7,9 +7,15 @@ export const searchEngines = [
     searchUrl: 'https://www.google.com/search?q='
   },
   {
+    id: 'baidu',
+    name: 'Baidu',
+    icon: '/icons/baidu.svg',
+    searchUrl: 'https://www.baidu.com/s?wd='
+  },
+  {
     id: 'scholar',
     name: 'Google Scholar',
-    icon: '/icons/scholar.svg',
+    icon: '/icons/google-scholar.svg',
     searchUrl: 'https://scholar.google.com/scholar?q='
   }
 ];
@@ -20,14 +26,14 @@ export const defaultBookmarks = [
     id: '1',
     title: 'GitHub',
     url: 'https://github.com',
-    icon: '',
+    icon: '/icons/github.svg',
     category: 'developer'
   },
   {
     id: '2',
     title: 'Google',
     url: 'https://www.google.com',
-    icon: '',
+    icon: '/icons/google.svg',
     category: 'developer'
   },
   {
