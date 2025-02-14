@@ -2,12 +2,35 @@ import { useState } from 'react';
 import { Listbox } from '@headlessui/react';
 import { ChevronUpDownIcon, CheckIcon } from '@heroicons/react/24/outline';
 import { searchEngines } from '../data/bookmarks';
+import Image from 'next/image';
+
+// 添加类型定义
+type SearchEngine = {
+  id: string;
+  name: string;
+  icon: string;
+  searchUrl: string;
+};
 
 // 搜索栏组件
 export default function SearchBar() {
   // 当前选中的搜索引擎和搜索关键词
   const [selectedEngine, setSelectedEngine] = useState(searchEngines[0]);
   const [searchTerm, setSearchTerm] = useState('');
+
+  const [imageError] = useState(false);
+  
+  // 获取图标URL的函数
+  const getIconUrl = (value: SearchEngine) => {
+    if (imageError || (!value.icon && !value.searchUrl)) {
+      // 当发生错误或没有图标和URL时，使用默认图标
+      return '/default.svg';  // 确保在 public 目录下有这个默认图标
+    }
+    if (value.icon) {
+      return value.icon;
+    }
+    return `/default.svg`
+  };
 
   // 处理搜索提交
   const handleSearch = (e: React.FormEvent) => {
@@ -34,9 +57,11 @@ export default function SearchBar() {
               transition-all duration-200">
               <span className="block truncate">
                 <div className="flex items-center gap-2">
-                  <img 
-                    src={selectedEngine.icon || `https://www.google.com/s2/favicons?domain=${selectedEngine.searchUrl}`} 
-                    alt={selectedEngine.name}
+                  <Image 
+                    src={getIconUrl(selectedEngine)} 
+                    alt={selectedEngine.name || ''}
+                    width={16}  // 对应原来的 w-4 (16px)
+                    height={16} // 对应原来的 h-4 (16px)
                     className="w-4 h-4"
                   />
                   <span>{selectedEngine.name}</span>
@@ -73,9 +98,11 @@ export default function SearchBar() {
                   {({ selected }) => (
                     <>
                       <div className="flex items-center gap-2">
-                        <img 
-                          src={engine.icon || `https://www.google.com/s2/favicons?domain=${engine.searchUrl}`} 
-                          alt={engine.name}
+                        <Image 
+                          src={getIconUrl(engine)} 
+                          alt={engine.name || ''}
+                          width={16}
+                          height={16}
                           className="w-4 h-4"
                         />
                         <span className={`block truncate ${selected ? 'font-medium' : 'font-normal'}`}>

@@ -14,7 +14,7 @@ import { PlusIcon, TrashIcon, ArrowDownTrayIcon, ArrowUpTrayIcon } from '@heroic
 export default function Home() {
   const { bookmarks } = useBookmarks();
   const { categories } = useCategories();
-  const [activeCategory, setActiveCategory] = useState<string | null>(null);
+  const [activeCategory] = useState<string | null>(null);
   const [addingCategory, setAddingCategory] = useState<string | null>(null);
   const [showClearConfirm, setShowClearConfirm] = useState(false);
   const [showImport, setShowImport] = useState(false);
@@ -47,6 +47,7 @@ export default function Home() {
       localStorage.setItem('categories', JSON.stringify(data.categories));
       window.location.reload();
     } catch (error) {
+      console.error('导入失败：', error);
       alert('导入失败：无效的文件格式');
     }
   };

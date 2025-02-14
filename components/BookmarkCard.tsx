@@ -3,6 +3,7 @@ import { Bookmark } from '../types';
 import { useBookmarks } from '../contexts/BookmarkContext';
 import Modal from './Modal';
 import { TrashIcon } from '@heroicons/react/24/outline';
+import Image from 'next/image';
 
 interface BookmarkCardProps {
   bookmark: Bookmark;
@@ -12,6 +13,20 @@ export default function BookmarkCard({ bookmark }: BookmarkCardProps) {
   const { removeBookmark } = useBookmarks();
   const [showDelete, setShowDelete] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
+
+  const [imageError] = useState(false);
+  
+  // 获取图标URL的函数
+  const getIconUrl = () => {
+    if (imageError || (!bookmark.icon && !bookmark.url)) {
+      // 当发生错误或没有图标和URL时，使用默认图标
+      return '/default.svg';  // 确保在 public 目录下有这个默认图标
+    }
+    if (bookmark.icon) {
+      return bookmark.icon;
+    }
+    return '/default.svg'
+  };
 
   // 处理删除确认
   const handleDelete = () => {
@@ -39,12 +54,14 @@ export default function BookmarkCard({ bookmark }: BookmarkCardProps) {
           rel="noopener noreferrer"
           className="flex items-center gap-2 h-full"
         >
-          <img 
-            src={bookmark.icon || `https://www.google.com/s2/favicons?domain=${bookmark.url}`}
-            alt={bookmark.title}
+          <Image 
+            src={getIconUrl()} 
+            alt={''}
+            width={24}
+            height={24}
             className="w-6 h-6 flex-shrink-0"
           />
-          <span className="flex-1 text-gray-800 dark:text-gray-200 text-sm truncate">
+          <span className="flex-1 text-gray-800 dark:text-gray-200 text-l ml-1 truncate">
             {bookmark.title}
           </span>
         </a>
@@ -76,7 +93,7 @@ export default function BookmarkCard({ bookmark }: BookmarkCardProps) {
       >
         <div className="space-y-4">
           <p className="text-gray-600 dark:text-gray-300">
-            确定要删除书签 "{bookmark.title}" 吗？
+            确定要删除书签 &quot;{bookmark.title}&quot; 吗？
           </p>
           <div className="flex justify-end gap-3">
             <button
