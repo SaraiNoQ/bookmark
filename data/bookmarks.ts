@@ -20,112 +20,77 @@ export const defaultBookmarks = [
     id: '1',
     title: 'GitHub',
     url: 'https://github.com',
-    icon: '../icons/github.svg',
+    icon: '',
     category: 'developer'
   },
   {
     id: '2',
     title: 'Google',
     url: 'https://www.google.com',
-    icon: '../icons/google.svg',
+    icon: '',
     category: 'developer'
   },
   {
     id: '3',
     title: 'QQ',
     url: 'https://www.google.com',
-    icon: '../icons/google.svg',
+    icon: '',
     category: 'social'
   },
   {
-    id: '3',
+    id: '4',
     title: 'QQ',
     url: 'https://www.google.com',
-    icon: '../icons/google.svg',
+    icon: '',
     category: 'social'
   },
   {
-    id: '3',
+    id: '5',
     title: 'QQ',
     url: 'https://www.google.com',
-    icon: '../icons/google.svg',
+    icon: '',
     category: 'social'
   },
   {
-    id: '3',
+    id: '6',
     title: 'QQ',
     url: 'https://www.google.com',
-    icon: '../icons/google.svg',
+    icon: '',
     category: 'social'
   },
   {
-    id: '3',
+    id: '7',
     title: 'QQ',
     url: 'https://www.google.com',
-    icon: '../icons/google.svg',
+    icon: '',
     category: 'social'
   },
   {
-    id: '3',
+    id: '8',
     title: 'QQ',
     url: 'https://www.google.com',
-    icon: '../icons/google.svg',
+    icon: '',
     category: 'social'
   },
   {
-    id: '3',
+    id: '9',
     title: 'QQ',
     url: 'https://www.google.com',
-    icon: '../icons/google.svg',
+    icon: '',
     category: 'social'
   },
   {
-    id: '3',
+    id: '10',
     title: 'QQ',
     url: 'https://www.google.com',
-    icon: '../icons/google.svg',
+    icon: '',
     category: 'social'
   },
   {
-    id: '3',
+    id: '11',
     title: 'QQ',
     url: 'https://www.google.com',
-    icon: '../icons/google.svg',
+    icon: '',
     category: 'social'
   },
-  {
-    id: '3',
-    title: 'QQ',
-    url: 'https://www.google.com',
-    icon: '../icons/google.svg',
-    category: 'social'
-  },
-  {
-    id: '3',
-    title: 'QQ',
-    url: 'https://www.google.com',
-    icon: '../icons/google.svg',
-    category: 'social'
-  },
-  {
-    id: '3',
-    title: 'QQ',
-    url: 'https://www.google.com',
-    icon: '../icons/google.svg',
-    category: 'social'
-  },
-  {
-    id: '3',
-    title: 'QQ',
-    url: 'https://www.google.com',
-    icon: '../icons/google.svg',
-    category: 'social'
-  },
-  {
-    id: '3',
-    title: 'QQ',
-    url: 'https://www.google.com',
-    icon: '../icons/google.svg',
-    category: 'social'
-  }
 ]; 

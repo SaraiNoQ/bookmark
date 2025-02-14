@@ -27,7 +27,7 @@ export default function Sidebar() {
 
   return (
     <>
-      <div className="fixed left-0 top-0 h-screen w-[72px] 
+      <div className="fixed left-0 top-0 min-h-[100%] w-[72px] 
         bg-white dark:bg-gray-800 
         border-r border-gray-200 dark:border-gray-700
         flex flex-col items-center py-4 gap-2 z-50

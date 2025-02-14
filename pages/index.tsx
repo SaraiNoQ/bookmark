@@ -60,7 +60,7 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 dark:bg-gray-900 transition-colors">
+    <div className="min-h-screen min-w-screen bg-gray-100 dark:bg-gray-900 transition-colors">
       {/* 侧边栏 */}
       <Sidebar />
 

@@ -40,7 +40,7 @@ export default function BookmarkCard({ bookmark }: BookmarkCardProps) {
           className="flex items-center gap-2 h-full"
         >
           <img 
-            src={bookmark.icon || `https://www.google.com/s2/favicons?domain=${bookmark.url}`}
+            src={`https://www.google.com/s2/favicons?domain=${bookmark.url}`}
             alt={bookmark.title}
             className="w-6 h-6 flex-shrink-0"
           />
