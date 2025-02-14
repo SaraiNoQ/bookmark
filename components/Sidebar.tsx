@@ -19,6 +19,29 @@ export default function Sidebar() {
     return icons[category] || '📌';
   };
 
+  // 处理分类点击
+  const handleCategoryClick = (category: string) => {
+    setActiveCategory(activeCategory === category ? null : category);
+    
+    // 查找对应的分类标题元素
+    const element = document.getElementById(`category-${category}`);
+    if (element) {
+      // 获取元素顶部位置
+      const elementTop = element.getBoundingClientRect().top;
+      const offsetPosition = elementTop + window.pageYOffset - 15; // 减去头部高度
+
+      // 检查是否有足够的滚动空间
+      const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+      const targetScroll = Math.min(offsetPosition, maxScroll);
+
+      // 平滑滚动
+      window.scrollTo({
+        top: targetScroll,
+        behavior: 'smooth'
+      });
+    }
+  };
+
   // 处理添加新分类
   const handleAddCategory = (newCategory: string) => {
     addCategory(newCategory);
@@ -35,7 +58,7 @@ export default function Sidebar() {
         {categories.map((category) => (
           <div key={category} className="relative group">
             <button
-              onClick={() => setActiveCategory(activeCategory === category ? null : category)}
+              onClick={() => handleCategoryClick(category)}
               className={`w-12 h-12 rounded-full flex items-center justify-center 
                 transition-all duration-200 group-hover:rounded-2xl
                 ${activeCategory === category 

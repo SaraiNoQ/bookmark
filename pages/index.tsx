@@ -8,6 +8,7 @@ import Sidebar from '../components/Sidebar';
 import Modal from '../components/Modal';
 import AddBookmarkForm from '../components/AddBookmarkForm';
 import FileUploader from '../components/FileUploader';
+import BackToTop from '../components/BackToTop';
 import { PlusIcon, TrashIcon, ArrowDownTrayIcon, ArrowUpTrayIcon } from '@heroicons/react/24/outline';
 
 export default function Home() {
@@ -117,7 +118,7 @@ export default function Home() {
           {/* 分类书签展示 */}
           <div className="mt-8 space-y-12">
             {filteredCategories.map(category => (
-              <div key={category}>
+              <div key={category} id={`category-${category}`}>
                 <h2 className="text-xl font-semibold mb-6 text-gray-800 dark:text-gray-200 px-2">
                   {category.charAt(0).toUpperCase() + category.slice(1)}
                 </h2>
@@ -234,6 +235,8 @@ export default function Home() {
           </div>
         </div>
       </Modal>
+
+      <BackToTop />
     </div>
   );
 } 
