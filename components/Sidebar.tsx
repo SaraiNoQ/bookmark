@@ -51,7 +51,7 @@ export default function Sidebar() {
               bg-gray-800 dark:bg-gray-900 
               text-white
               rounded-md text-sm whitespace-nowrap 
-              opacity-0 group-hover:opacity-100 
+              opacity-0 group-hover:opacity-90 
               transition-opacity pointer-events-none
               shadow-lg">
               {category.charAt(0).toUpperCase() + category.slice(1)}

@@ -20,12 +20,12 @@ export default function SearchBar() {
 
   return (
     <form onSubmit={handleSearch} className="w-full max-w-3xl mx-auto p-4">
-      <div className="flex items-center gap-2 p-3 rounded-lg bg-white dark:bg-gray-800 shadow-neu-light dark:shadow-neu-dark">
+      <div className="flex items-center gap-2 p-3 rounded-lg bg-white dark:bg-gray-800">
         {/* 搜索引擎选择器 */}
         {/* 自定义搜索引擎选择器 */}
         <Listbox value={selectedEngine} onChange={setSelectedEngine}>
           <div className="relative">
-            <Listbox.Button className="relative w-[140px] py-2 pl-3 pr-8 
+            <Listbox.Button className="relative w-[160px] py-2 pl-3 pr-8 
               text-left rounded-lg cursor-pointer
               bg-gray-50 dark:bg-gray-700
               hover:bg-gray-100 dark:hover:bg-gray-600
@@ -35,7 +35,7 @@ export default function SearchBar() {
               <span className="block truncate">
                 <div className="flex items-center gap-2">
                   <img 
-                    src={selectedEngine.icon} 
+                    src={`https://www.google.com/s2/favicons?domain=${selectedEngine.searchUrl}`} 
                     alt={selectedEngine.name}
                     className="w-4 h-4"
                   />
@@ -74,7 +74,7 @@ export default function SearchBar() {
                     <>
                       <div className="flex items-center gap-2">
                         <img 
-                          src={engine.icon} 
+                          src={`https://www.google.com/s2/favicons?domain=${engine.searchUrl}`} 
                           alt={engine.name}
                           className="w-4 h-4"
                         />
@@ -113,6 +113,7 @@ export default function SearchBar() {
             bg-gradient-to-r from-blue-500 to-purple-500 
             text-white
             hover:shadow-lg hover:scale-102
+            shadow-neu-light dark:shadow-neu-dark
             active:scale-98
             transition-all duration-200"
         >

@@ -60,15 +60,15 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen min-w-screen bg-gray-100 dark:bg-gray-900 transition-colors">
+    <div className="min-h-screen min-w-screen font-blackFont bg-gray-100 dark:bg-gray-900 transition-colors">
       {/* 侧边栏 */}
       <Sidebar />
 
       {/* 主要内容区域 */}
       <div className="ml-[72px]">
-        <header className="sticky top-0 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm z-50">
+        <header className="sticky top-0 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm z-40">
           <div className="container mx-auto px-4 py-3 flex items-center justify-between">
-            <h1 className="text-2xl font-bold bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent">
+            <h1 className="font-kai text-[1.75rem] font-bold bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent">
               书签导航
             </h1>
             <div className="flex items-center gap-2">
