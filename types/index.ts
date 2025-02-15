@@ -1,6 +1,6 @@
 // 书签类型定义
 export interface Bookmark {
-  id: string;
+  id?: string;
   title: string;
   url: string;
   icon?: string;

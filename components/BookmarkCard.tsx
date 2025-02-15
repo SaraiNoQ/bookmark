@@ -30,7 +30,7 @@ export default function BookmarkCard({ bookmark }: BookmarkCardProps) {
 
   // 处理删除确认
   const handleDelete = () => {
-    removeBookmark(bookmark.id);
+    removeBookmark(bookmark.id as string);
     setShowDeleteModal(false);
   };
 

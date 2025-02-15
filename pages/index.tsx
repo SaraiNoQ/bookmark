@@ -10,6 +10,7 @@ import AddBookmarkForm from '../components/AddBookmarkForm';
 import FileUploader from '../components/FileUploader';
 import BackToTop from '../components/BackToTop';
 import { PlusIcon, TrashIcon, ArrowDownTrayIcon, ArrowUpTrayIcon } from '@heroicons/react/24/outline';
+import { Bookmark } from '../types';
 
 export default function Home() {
   const { bookmarks } = useBookmarks();
@@ -38,7 +39,7 @@ export default function Home() {
   const handleExport = async () => {
     const data = {
       // 移除每个书签对象中的id字段
-      bookmarks: bookmarks.map(({ id, ...rest }) => rest),
+      bookmarks: bookmarks.map(({ id: _id, ...rest }) => rest),
       categories,
     };
     
@@ -68,7 +69,7 @@ export default function Home() {
       const data = JSON.parse(importContent);
       
       // 为data.bookmarks中的每个书签生成id
-      const bookmarksWithIds = data.bookmarks.map((bookmark: any, index: string) => ({
+      const bookmarksWithIds = data.bookmarks.map((bookmark: Bookmark) => ({
         ...bookmark,
         // 生成一个随机字符串
         id: crypto.randomUUID()
