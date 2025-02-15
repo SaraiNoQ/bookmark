@@ -20,17 +20,42 @@ export default function Home() {
   const [showImport, setShowImport] = useState(false);
   const [importContent, setImportContent] = useState<string | null>(null);
 
+  const generateHash = async(blob: Blob) => {
+    // 将Blob转换为ArrayBuffer
+    const arrayBuffer = await blob.arrayBuffer();
+
+    // 使用crypto.subtle.digest生成哈希值
+    const hashBuffer = await crypto.subtle.digest('SHA-256', arrayBuffer);
+
+    // 将哈希值转换为十六进制字符串
+    const hashArray = Array.from(new Uint8Array(hashBuffer));
+    const hashHex = hashArray.map(byte => byte.toString(16).padStart(2, '0')).join('');
+
+    return hashHex.slice(0, 16);
+  }
+
   // 导出书签
-  const handleExport = () => {
+  const handleExport = async () => {
     const data = {
       bookmarks,
-      categories
+      categories,
     };
-    const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+
+    // 为数据生成简单的哈希值
+    // const hash = btoa(JSON.stringify(data)).slice(0, 8);
+    
+    const blob = new Blob(
+      [JSON.stringify(data, null, 2)], 
+      { type: 'application/json' }
+    );
+
+    //为文件生成哈希值
+    const hash = await generateHash(blob);
+    
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = 'bookmarks-export.json';
+    a.download = `bookmarks-export_${hash}.json`;
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);

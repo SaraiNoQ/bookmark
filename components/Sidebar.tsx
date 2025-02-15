@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useCategories } from '../contexts/CategoryContext';
 import Modal from './Modal';
 import AddCategoryForm from './AddCategoryForm';
+import { categoryIcons } from '../data/bookmarks';
 
 export default function Sidebar() {
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
@@ -36,16 +37,7 @@ export default function Sidebar() {
   };
 
   const getCategoryIcon = (category: string) => {
-    const icons: Record<string, string> = {
-      Tools: '🔧',
-      Developer: '🛠️',
-      AI: '💻',
-      Entertainment: '🎮',
-      Acadamic: '📚',
-      Literature: '✒️',
-      Social: '👥',
-    };
-    return icons[category] || returnRandomEmoji();
+    return categoryIcons[category] || returnRandomEmoji();
   };
 
   // 处理分类点击

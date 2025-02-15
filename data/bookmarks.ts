@@ -1,3 +1,17 @@
+// 默认分类
+export const defaultCategories = ['Tools', 'Developer', 'AI', 'Entertainment', 'Academic', 'Literature', 'Social'];
+
+// 分类图标映射
+export const categoryIcons: Record<string, string> = {
+  Tools: '🔧',
+  Developer: '🛠️',
+  AI: '💻',
+  Entertainment: '🎮',
+  Academic: '📚',
+  Literature: '✒️',
+  Social: '👥',
+};
+
 // 预设搜索引擎配置
 export const searchEngines = [
   {

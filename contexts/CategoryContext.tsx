@@ -1,4 +1,5 @@
 import { createContext, useContext, useState, useEffect } from 'react';
+import { defaultCategories } from '../data/bookmarks';
 
 // 定义Context接口
 interface CategoryContextType {
@@ -9,9 +10,6 @@ interface CategoryContextType {
 
 // 创建Context
 const CategoryContext = createContext<CategoryContextType | undefined>(undefined);
-
-// 默认分类
-const defaultCategories = ['Tools','Developer', 'AI', 'Entertainment', 'Acadamic', 'Literature', 'Social'];
 
 // Context Provider组件
 export function CategoryProvider({ children }: { children: React.ReactNode }) {
