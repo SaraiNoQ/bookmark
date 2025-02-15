@@ -37,12 +37,10 @@ export default function Home() {
   // 导出书签
   const handleExport = async () => {
     const data = {
-      bookmarks,
+      // 移除每个书签对象中的id字段
+      bookmarks: bookmarks.map(({ id, ...rest }) => rest),
       categories,
     };
-
-    // 为数据生成简单的哈希值
-    // const hash = btoa(JSON.stringify(data)).slice(0, 8);
     
     const blob = new Blob(
       [JSON.stringify(data, null, 2)], 
@@ -68,7 +66,15 @@ export default function Home() {
     
     try {
       const data = JSON.parse(importContent);
-      localStorage.setItem('bookmarks', JSON.stringify(data.bookmarks));
+      
+      // 为data.bookmarks中的每个书签生成id
+      const bookmarksWithIds = data.bookmarks.map((bookmark: any, index: string) => ({
+        ...bookmark,
+        // 生成一个随机字符串
+        id: crypto.randomUUID()
+      }));
+      
+      localStorage.setItem('bookmarks', JSON.stringify(bookmarksWithIds));
       localStorage.setItem('categories', JSON.stringify(data.categories));
       window.location.reload();
     } catch (error) {
