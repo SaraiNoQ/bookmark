@@ -28,7 +28,7 @@ export const searchEngines = [
   },
   {
     id: 'bilibili',
-    name: 'Bilibili',
+    name: '哔哩哔哩',
     icon: '/icons/bilibili.svg',
     searchUrl: 'https://search.bilibili.com/all?keyword='
   },
@@ -39,10 +39,22 @@ export const searchEngines = [
     searchUrl: 'https://scholar.google.com/scholar?q='
   },
   {
+    id: 'google-translate',
+    name: '谷歌翻译',
+    icon: '/icons/google-translate.svg',
+    searchUrl: 'https://translate.google.com/?sl=auto&tl=en&text='
+  },
+  {
     id: 'zhihu',
     name: '知乎',
     icon: '/icons/zhihu.svg',
     searchUrl: 'https://www.zhihu.com/search?type=content&q='
+  },
+  {
+    id: 'xiaohongshu',
+    name: '小红书',
+    icon: '/icons/xiaohongshu.svg',
+    searchUrl: 'https://www.xiaohongshu.com/search_result?keyword='
   }
 ];
 
