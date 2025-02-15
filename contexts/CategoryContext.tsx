@@ -11,7 +11,7 @@ interface CategoryContextType {
 const CategoryContext = createContext<CategoryContextType | undefined>(undefined);
 
 // 默认分类
-const defaultCategories = ['developer', 'social', 'entertainment', 'work', 'study'];
+const defaultCategories = ['Tools','Developer', 'AI', 'Entertainment', 'Acadamic', 'Literature', 'Social'];
 
 // Context Provider组件
 export function CategoryProvider({ children }: { children: React.ReactNode }) {

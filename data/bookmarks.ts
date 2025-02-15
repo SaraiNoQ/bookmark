@@ -27,28 +27,28 @@ export const defaultBookmarks = [
     title: 'GitHub',
     url: 'https://github.com',
     icon: '/icons/github.svg',
-    category: 'developer'
+    category: 'Developer'
   },
   {
     id: '2',
     title: 'Google',
     url: 'https://www.google.com',
     icon: '/icons/google.svg',
-    category: 'developer'
+    category: 'Tools'
   },
   {
     id: '3',
     title: 'QQ',
     url: 'https://www.google.com',
     icon: '',
-    category: 'social'
+    category: 'Social'
   },
   {
     id: '4',
     title: 'QQ',
     url: 'https://www.google.com',
     icon: '',
-    category: 'social'
+    category: 'Social'
   },
   {
     id: '5',
@@ -62,41 +62,41 @@ export const defaultBookmarks = [
     title: 'QQ',
     url: 'https://www.google.com',
     icon: '',
-    category: 'social'
+    category: 'Social'
   },
   {
     id: '7',
     title: 'QQ',
     url: 'https://www.google.com',
     icon: '',
-    category: 'social'
+    category: 'Social'
   },
   {
     id: '8',
     title: 'QQ',
     url: 'https://www.google.com',
     icon: '',
-    category: 'social'
+    category: 'Social'
   },
   {
     id: '9',
     title: 'QQ',
     url: 'https://www.google.com',
     icon: '',
-    category: 'social'
+    category: 'Social'
   },
   {
     id: '10',
     title: 'QQ',
     url: 'https://www.google.com',
     icon: '',
-    category: 'social'
+    category: 'Social'
   },
   {
     id: '11',
     title: 'QQ',
     url: 'https://www.google.com',
     icon: '',
-    category: 'social'
+    category: 'Social'
   },
 ]; 
