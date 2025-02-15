@@ -48,7 +48,7 @@ export default function SearchBar() {
                 hover:shadow-neu-light-hover dark:hover:shadow-neu-dark-hover
                 transition-all duration-200">
                 <span className="block truncate">
-                  <div className="flex items-center gap-2">
+                  <div className="flex items-center gap-6">
                     <Image 
                       src={getIconUrl(selectedEngine)} 
                       alt={selectedEngine.name || ''}

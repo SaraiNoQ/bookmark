@@ -59,9 +59,9 @@ export default function BookmarkCard({ bookmark }: BookmarkCardProps) {
             alt={''}
             width={24}
             height={24}
-            className="w-6 h-6 flex-shrink-0"
+            className="w-6 h-6 flex-shrink-0 ml-1"
           />
-          <span className="flex-1 text-gray-800 dark:text-gray-200 text-l ml-1 truncate">
+          <span className="flex-1 text-gray-800 dark:text-gray-200 text-l ml-1 truncate font-bold opacity-80">
             {bookmark.title}
           </span>
         </a>

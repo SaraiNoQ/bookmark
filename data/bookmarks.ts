@@ -27,10 +27,22 @@ export const searchEngines = [
     searchUrl: 'https://www.baidu.com/s?wd='
   },
   {
+    id: 'bilibili',
+    name: 'Bilibili',
+    icon: '/icons/bilibili.svg',
+    searchUrl: 'https://search.bilibili.com/all?keyword='
+  },
+  {
     id: 'scholar',
-    name: 'Google Scholar',
+    name: '谷歌学术',
     icon: '/icons/google-scholar.svg',
     searchUrl: 'https://scholar.google.com/scholar?q='
+  },
+  {
+    id: 'zhihu',
+    name: '知乎',
+    icon: '/icons/zhihu.svg',
+    searchUrl: 'https://www.zhihu.com/search?type=content&q='
   }
 ];
 
@@ -59,10 +71,10 @@ export const defaultBookmarks = [
   },
   {
     id: '4',
-    title: 'QQ',
-    url: 'https://www.google.com',
-    icon: '',
-    category: 'Social'
+    title: 'DouYin',
+    url: 'https://www.douyin.com',
+    icon: '/icons/douyin.svg',
+    category: 'Entertainment'
   },
   {
     id: '5',
