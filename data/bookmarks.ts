@@ -93,7 +93,7 @@ export const defaultBookmarks = [
     title: 'QQ',
     url: 'https://www.google.com',
     icon: '',
-    category: 'social'
+    category: 'Social'
   },
   {
     id: '6',
