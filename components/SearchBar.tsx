@@ -17,7 +17,7 @@ export default function SearchBar() {
   const [imageError] = useState(false);
   // 添加图片加载状态
   const [isLoading, setIsLoading] = useState(true);
-  
+  const [isLoadingOption, setIsLoadingOption] = useState(true);
   const getIconUrl = (value: SearchEngine) => {
     if (imageError || (!value.icon && !value.searchUrl)) {
       return '/default.svg';
@@ -67,8 +67,8 @@ export default function SearchBar() {
                       <Image 
                         src="/loading.svg"
                         alt={''}
-                        width={24}
-                        height={24}
+                        width={16}
+                        height={16}
                         className="w-4 h-4 ml-[-16px]"
                       />
                     )}
@@ -111,8 +111,22 @@ export default function SearchBar() {
                             alt={engine.name || ''}
                             width={16}
                             height={16}
-                            className="w-4 h-4"
+                            loading="lazy"
+                            className={`w-4 h-4
+                            transition-opacity duration-300
+                            ${isLoading ? 'opacity-0' : 'opacity-100'}`}
+                            onLoad={() => setIsLoadingOption(false)}
                           />
+                          {/* 仅在加载时显示默认图标 */}
+                          {isLoadingOption && (
+                            <Image 
+                              src="/loading.svg"
+                              alt={''}
+                              width={16}
+                              height={16}
+                              className="w-4 h-4 ml-[-16px]"
+                            />
+                          )}
                           <span className={`block truncate ${selected ? 'font-medium' : 'font-normal'}`}>
                             {engine.name}
                           </span>
