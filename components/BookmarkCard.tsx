@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Bookmark } from '../types';
 import { useBookmarks } from '../contexts/BookmarkContext';
 import Modal from './Modal';
-import { TrashIcon } from '@heroicons/react/24/outline';
+import { TrashIcon, ArrowUpIcon } from '@heroicons/react/24/outline';
 import Image from 'next/image';
 
 interface BookmarkCardProps {
@@ -10,7 +10,7 @@ interface BookmarkCardProps {
 }
 
 export default function BookmarkCard({ bookmark }: BookmarkCardProps) {
-  const { removeBookmark } = useBookmarks();
+  const { removeBookmark, updateBookmarksOrder } = useBookmarks();
   const [showDelete, setShowDelete] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
 
@@ -32,6 +32,12 @@ export default function BookmarkCard({ bookmark }: BookmarkCardProps) {
   const handleDelete = () => {
     removeBookmark(bookmark.id as string);
     setShowDeleteModal(false);
+  };
+
+  // 处理置顶
+  const handlePin = (e: React.MouseEvent) => {
+    e.preventDefault();
+    updateBookmarksOrder(bookmark.id as string, bookmark.category);
   };
 
   return (
@@ -67,21 +73,38 @@ export default function BookmarkCard({ bookmark }: BookmarkCardProps) {
         </a>
         
         {showDelete && (
-          <button
-            onClick={(e) => {
-              e.preventDefault();
-              setShowDeleteModal(true);
-            }}
-            className="absolute -top-2 -right-2 p-1.5 rounded-full
-              bg-red-100 dark:bg-red-900/30
-              hover:bg-red-200 dark:hover:bg-red-900/50
-              transition-all duration-200
-              opacity-0 group-hover:opacity-100
-              transform scale-90 group-hover:scale-100
-              shadow-lg"
-          >
-            <TrashIcon className="w-4 h-4 text-red-500" />
-          </button>
+          <div className="absolute -top-2 -right-2 flex gap-1">
+            {/* 置顶按钮 */}
+            <button
+              onClick={handlePin}
+              className="p-1.5 rounded-full
+                bg-blue-100 dark:bg-blue-900/30
+                hover:bg-blue-200 dark:hover:bg-blue-900/50
+                transition-all duration-200
+                opacity-0 group-hover:opacity-100
+                transform scale-90 group-hover:scale-100
+                shadow-lg"
+            >
+              <ArrowUpIcon className="w-4 h-4 text-blue-500" />
+            </button>
+            
+            {/* 删除按钮 */}
+            <button
+              onClick={(e) => {
+                e.preventDefault();
+                setShowDeleteModal(true);
+              }}
+              className="p-1.5 rounded-full
+                bg-red-100 dark:bg-red-900/30
+                hover:bg-red-200 dark:hover:bg-red-900/50
+                transition-all duration-200
+                opacity-0 group-hover:opacity-100
+                transform scale-90 group-hover:scale-100
+                shadow-lg"
+            >
+              <TrashIcon className="w-4 h-4 text-red-500" />
+            </button>
+          </div>
         )}
       </div>
 

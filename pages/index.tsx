@@ -21,6 +21,7 @@ export default function Home() {
   const [showImport, setShowImport] = useState(false);
   const [importContent, setImportContent] = useState<string | null>(null);
 
+  // 为文件生成哈希值
   const generateHash = async(blob: Blob) => {
     // 将Blob转换为ArrayBuffer
     const arrayBuffer = await blob.arrayBuffer();

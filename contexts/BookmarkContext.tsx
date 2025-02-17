@@ -8,6 +8,7 @@ interface BookmarkContextType {
   addBookmark: (bookmark: Omit<Bookmark, 'id'>) => void;
   removeBookmark: (id: string) => void;
   updateBookmark: (id: string, bookmark: Partial<Bookmark>) => void;
+  updateBookmarksOrder: (bookmarkId: string, category: string) => void;
 }
 
 // 创建Context
@@ -50,12 +51,32 @@ export function BookmarkProvider({ children }: { children: React.ReactNode }) {
     ));
   };
 
+  // 更新书签顺序
+  const updateBookmarksOrder = (bookmarkId: string, category: string) => {
+    setBookmarks(prevBookmarks => {
+      // 找到要置顶的书签
+      const bookmarkToPin = prevBookmarks.find(b => b.id === bookmarkId);
+      if (!bookmarkToPin) return prevBookmarks;
+
+      // 过滤出其他书签
+      const otherBookmarks = prevBookmarks.filter(b => b.id !== bookmarkId);
+      
+      // 找到同类别的书签
+      const categoryBookmarks = otherBookmarks.filter(b => b.category === category);
+      const nonCategoryBookmarks = otherBookmarks.filter(b => b.category !== category);
+
+      // 将要置顶的书签放在同类别书签的最前面
+      return [...nonCategoryBookmarks, bookmarkToPin, ...categoryBookmarks];
+    });
+  };
+
   return (
     <BookmarkContext.Provider value={{
       bookmarks,
       addBookmark,
       removeBookmark,
       updateBookmark,
+      updateBookmarksOrder,
     }}>
       {children}
     </BookmarkContext.Provider>
