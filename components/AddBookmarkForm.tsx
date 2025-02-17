@@ -16,6 +16,12 @@ export default function AddBookmarkForm({ category, onClose }: AddBookmarkFormPr
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+
+    // 处理空图标的情况
+    if (formData.icon.trim() === '') {
+      formData.icon = `/default${Math.floor(Math.random() * 10)}.svg`;
+    }
+
     addBookmark({
       ...formData,
       category

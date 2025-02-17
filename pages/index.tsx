@@ -62,9 +62,39 @@ export default function Home() {
     URL.revokeObjectURL(url);
   };
 
+  // 文件验证
+  const validateImportFile = (content: string): boolean => {
+    try {
+      const data = JSON.parse(content);
+      
+      // 验证数据结构
+      const isValidStructure = 
+        Array.isArray(data.bookmarks) &&
+        Array.isArray(data.categories) &&
+        data.bookmarks.every((bookmark: any) => (
+          typeof bookmark.title === 'string' &&
+          typeof bookmark.url === 'string' &&
+          typeof bookmark.category === 'string' &&
+          (bookmark.icon === undefined || typeof bookmark.icon === 'string')
+        ));
+
+      // 验证数据大小
+      // const isValidSize = 
+      //   data.bookmarks.length <= 1000 && // 限制书签数量
+      //   data.categories.length <= 100;    // 限制分类数量
+
+      return isValidStructure;
+    } catch {
+      return false;
+    }
+  };
+
   // 导入书签
   const handleImport = () => {
-    if (!importContent) return;
+    if (!importContent || !validateImportFile(importContent)) {
+      alert('导入失败：无效的文件格式');
+      return;
+    }
     
     try {
       const data = JSON.parse(importContent);

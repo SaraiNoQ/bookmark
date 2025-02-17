@@ -14,6 +14,16 @@ interface BookmarkContextType {
 // 创建Context
 const BookmarkContext = createContext<BookmarkContextType | undefined>(undefined);
 
+// 添加 URL 验证函数
+const isValidUrl = (url: string): boolean => {
+  try {
+    const urlObj = new URL(url);
+    return ['http:', 'https:'].includes(urlObj.protocol);
+  } catch {
+    return false;
+  }
+};
+
 // Context Provider组件
 export function BookmarkProvider({ children }: { children: React.ReactNode }) {
   // 状态管理：书签列表
@@ -32,6 +42,10 @@ export function BookmarkProvider({ children }: { children: React.ReactNode }) {
 
   // 添加书签
   const addBookmark = (bookmark: Omit<Bookmark, 'id'>) => {
+    if (!isValidUrl(bookmark.url)) {
+      throw new Error('无效的 URL');
+    }
+
     const newBookmark = {
       ...bookmark,
       id: Date.now().toString(),
