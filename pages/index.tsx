@@ -71,7 +71,7 @@ export default function Home() {
       const isValidStructure = 
         Array.isArray(data.bookmarks) &&
         Array.isArray(data.categories) &&
-        data.bookmarks.every((bookmark: any) => (
+        data.bookmarks.every((bookmark: Bookmark) => (
           typeof bookmark.title === 'string' &&
           typeof bookmark.url === 'string' &&
           typeof bookmark.category === 'string' &&
