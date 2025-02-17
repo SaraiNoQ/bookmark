@@ -13,6 +13,8 @@ export default function BookmarkCard({ bookmark }: BookmarkCardProps) {
   const { removeBookmark, updateBookmarksOrder } = useBookmarks();
   const [showDelete, setShowDelete] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
+  // 添加图片加载状态
+  const [isLoading, setIsLoading] = useState(true);
 
   const [imageError] = useState(false);
   
@@ -65,8 +67,22 @@ export default function BookmarkCard({ bookmark }: BookmarkCardProps) {
             alt={''}
             width={24}
             height={24}
-            className="w-6 h-6 flex-shrink-0 ml-1"
+            loading="lazy"
+            className={`w-6 h-6 flex-shrink-0 ml-1
+            transition-opacity duration-300
+            ${isLoading ? 'opacity-0' : 'opacity-100'}`}
+            onLoad={() => setIsLoading(false)}
           />
+          {/* 仅在加载时显示默认图标 */}
+          {isLoading && (
+            <Image 
+              src="/loading.svg"
+              alt={''}
+              width={24}
+              height={24}
+              className="w-6 h-6 flex-shrink-0 ml-[-20px]"
+            />
+          )}
           <span className="flex-1 text-gray-800 dark:text-gray-200 text-l ml-1 truncate font-bold opacity-80">
             {bookmark.title}
           </span>
