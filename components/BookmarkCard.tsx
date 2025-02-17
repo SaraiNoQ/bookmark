@@ -42,6 +42,14 @@ export default function BookmarkCard({ bookmark }: BookmarkCardProps) {
     updateBookmarksOrder(bookmark.id as string, bookmark.category);
   };
 
+  // 添加内容净化函数
+  const sanitizeContent = (content: string): string => {
+    return content
+      .replace(/[<>]/g, '') // 移除 HTML 标签
+      .trim()
+      .slice(0, 100);  // 限制长度
+  };
+
   return (
     <>
        <div 
@@ -84,7 +92,7 @@ export default function BookmarkCard({ bookmark }: BookmarkCardProps) {
             />
           )}
           <span className="flex-1 text-gray-800 dark:text-gray-200 text-l ml-1 truncate font-bold opacity-80">
-            {bookmark.title}
+            {sanitizeContent(bookmark.title)}
           </span>
         </a>
         
