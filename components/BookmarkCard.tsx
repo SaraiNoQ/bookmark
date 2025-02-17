@@ -13,8 +13,7 @@ export default function BookmarkCard({ bookmark }: BookmarkCardProps) {
   const { removeBookmark, updateBookmarksOrder } = useBookmarks();
   const [showDelete, setShowDelete] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
-  // 添加图片加载状态
-  const [isLoading, setIsLoading] = useState(true);
+  const [isImageLoading, setIsImageLoading] = useState(true);
 
   const [imageError] = useState(false);
   
@@ -70,27 +69,35 @@ export default function BookmarkCard({ bookmark }: BookmarkCardProps) {
           rel="noopener noreferrer"
           className="flex items-center gap-2 h-full"
         >
-          <Image 
-            src={getIconUrl()} 
-            alt={''}
-            width={24}
-            height={24}
-            loading="lazy"
-            className={`w-6 h-6 flex-shrink-0 ml-1
-            transition-opacity duration-300
-            ${isLoading ? 'opacity-0' : 'opacity-100'}`}
-            onLoad={() => setIsLoading(false)}
-          />
-          {/* 仅在加载时显示默认图标 */}
-          {isLoading && (
+          <div className="relative w-6 h-6 flex-shrink-0">
+            {/* Loading 图标 */}
+            {isImageLoading && (
+              <Image
+                src="/loading.svg"
+                alt="loading"
+                fill
+                sizes="24px"
+                className="object-contain"
+              />
+            )}
+            {/* 实际图标 */}
             <Image 
-              src="/loading.svg"
+              src={getIconUrl()} 
               alt={''}
-              width={24}
-              height={24}
-              className="w-6 h-6 flex-shrink-0 ml-[-20px]"
+              fill
+              sizes="24px"
+              loading="lazy"
+              className={`object-contain transition-opacity duration-300 ${
+                isImageLoading ? 'opacity-0' : 'opacity-100'
+              }`}
+              onLoad={() => setIsImageLoading(false)}
+              onError={() => {
+                setIsImageLoading(false);
+                const img = document.createElement('img');
+                img.src = '/default.svg';
+              }}
             />
-          )}
+          </div>
           <span className="flex-1 text-gray-800 dark:text-gray-200 text-l ml-1 truncate font-bold opacity-80">
             {sanitizeContent(bookmark.title)}
           </span>
