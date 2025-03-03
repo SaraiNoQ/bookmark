@@ -1,30 +1,33 @@
-import { useState } from 'react';
-import { useBookmarks } from '../contexts/BookmarkContext';
+import { useState } from "react";
+import { useBookmarks } from "../contexts/BookmarkContext";
 
 interface AddBookmarkFormProps {
   category: string;
   onClose: () => void;
 }
 
-export default function AddBookmarkForm({ category, onClose }: AddBookmarkFormProps) {
+export default function AddBookmarkForm({
+  category,
+  onClose,
+}: AddBookmarkFormProps) {
   const { addBookmark } = useBookmarks();
   const [formData, setFormData] = useState({
-    title: '',
-    url: '',
-    icon: ''
+    title: "",
+    url: "",
+    icon: "",
   });
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
     // 处理空图标的情况
-    if (formData.icon.trim() === '') {
+    if (formData.icon.trim() === "") {
       formData.icon = `/default${Math.floor(Math.random() * 10)}.svg`;
     }
 
     addBookmark({
       ...formData,
-      category
+      category,
     });
     onClose();
   };
@@ -38,7 +41,9 @@ export default function AddBookmarkForm({ category, onClose }: AddBookmarkFormPr
         <input
           type="text"
           value={formData.title}
-          onChange={e => setFormData(prev => ({ ...prev, title: e.target.value }))}
+          onChange={(e) =>
+            setFormData((prev) => ({ ...prev, title: e.target.value }))
+          }
           className="w-full px-3 py-2 rounded-lg
             bg-gray-100 dark:bg-gray-700
             border border-gray-200 dark:border-gray-600
@@ -55,7 +60,9 @@ export default function AddBookmarkForm({ category, onClose }: AddBookmarkFormPr
         <input
           type="url"
           value={formData.url}
-          onChange={e => setFormData(prev => ({ ...prev, url: e.target.value }))}
+          onChange={(e) =>
+            setFormData((prev) => ({ ...prev, url: e.target.value }))
+          }
           className="w-full px-3 py-2 rounded-lg
             bg-gray-100 dark:bg-gray-700
             border border-gray-200 dark:border-gray-600
@@ -70,9 +77,11 @@ export default function AddBookmarkForm({ category, onClose }: AddBookmarkFormPr
           图标URL（可选）
         </label>
         <input
-          type="url"
+          type="text"
           value={formData.icon}
-          onChange={e => setFormData(prev => ({ ...prev, icon: e.target.value }))}
+          onChange={(e) =>
+            setFormData((prev) => ({ ...prev, icon: e.target.value }))
+          }
           className="w-full px-3 py-2 rounded-lg
             bg-gray-100 dark:bg-gray-700
             border border-gray-200 dark:border-gray-600
@@ -105,4 +114,4 @@ export default function AddBookmarkForm({ category, onClose }: AddBookmarkFormPr
       </div>
     </form>
   );
-} 
+}
